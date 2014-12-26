@@ -22,6 +22,9 @@ public class Controller {
 		System.out.println(this.wrapper.getTitle());
 		this.investmentManager.addInvestment();
 		System.out.println(this.investmentManager.getAllInvestments());
+		ui.display(this.wrapper.getTitle());
+		ui.display(this.investmentManager.getAllInvestments());
+		
 	}
 	
 	public static void main(String []args) {
