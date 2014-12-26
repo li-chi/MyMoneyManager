@@ -15,7 +15,7 @@ public class Investment {
 	private String bank;
 	
 	public Investment(Date purchaseDate_, Date expireDate_, double capital_, double interestRate_,
-			int period_, double dailyInterest_, double expectedReturn_, double actualReturn_, String bank_) {
+			int period_, double dailyInterest_, double expectedReturn_, String bank_) {
 		this.purchaseDate = purchaseDate_;
 		this.expireDate = expireDate_;
 		this.capital = capital_;

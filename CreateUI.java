@@ -14,8 +14,8 @@ public class CreateUI {
 	private ArrayList<TextField> fieldList;
 	static private CreateUI instance;
 	private Controller controller;
-	private final String[] labelNames = {"Purchase Date(yyyy/mm/dd)","Bank",
-			"Capital(RMB)","Rate(%)","Period(days)"};
+	private final String[] labelNames = {"Purchase Date(yyyy/mm/dd)","Bank name(<5 characters)",
+			"Capital(RMB)","Interest Rate(%)","Period(days)"};
 	Frame frame;
 	
 	private CreateUI(Controller controller_) {
@@ -36,19 +36,20 @@ public class CreateUI {
 		frame.add(cancel);
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.createNewInvestment();
+				controller.createNewInvestment(fieldList.get(0).getText(),fieldList.get(1).getText(),
+						fieldList.get(2).getText(),fieldList.get(3).getText(),fieldList.get(4).getText());
 			}
 		});
 		
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				instance = null;
+				frame.setVisible(false);
 				frame.dispose();
 			}
 		});
 		
 		frame.addWindowListener(new WindowAdapter(){
-		      public void windowClosed(WindowEvent e){ System.exit(0); }
 		      public void windowClosing(WindowEvent e){ 
 		    	  frame.setVisible(false);
 		    	  frame.dispose();

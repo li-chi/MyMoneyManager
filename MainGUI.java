@@ -79,6 +79,10 @@ public class MainGUI {
 		output.append(msg+'\n');
 	}
 	
+	public void clear() {
+		output.setText("");
+	}
+	
 	public static MainGUI getInstance(Controller controller_) {
 	      if(instance == null) {
 	         instance = new MainGUI(controller_);
