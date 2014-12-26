@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -18,8 +20,10 @@ public class MainGUI {
 	private Button exit;
 	private Frame frame;
 	private TextArea output;
+	Controller controller;
 	
 	private MainGUI(Controller controller_) {
+		this.controller = controller_;
 		this.create = new Button("Create");
 		this.edit = new Button("Edit");
 		this.editNum = new TextField(5);
@@ -39,11 +43,11 @@ public class MainGUI {
 		panel.add(panel1);
 		panel.add(panel2);
 		panel.add(panel3);
-		//panel.setLayout(new GridLayout(1,3));
+		panel.setLayout(new GridLayout(1,3));
 		panel.setSize(100, 800);
 		
 		
-		this.frame = new Frame();
+		this.frame = new Frame("My Money Manager");
 		frame.addWindowListener(new WindowAdapter(){
 		      public void windowClosed(WindowEvent e){ System.exit(0); }
 		      public void windowClosing(WindowEvent e){ 
@@ -52,10 +56,6 @@ public class MainGUI {
 		      }
 		    });
 		frame.add(panel);
-		/*frame.add(create);
-		frame.add(editNum);
-		frame.add(edit);
-		frame.add(exit);*/
 		output = new TextArea("",50,105,TextArea.SCROLLBARS_VERTICAL_ONLY);
 		output.setFont(new Font("Monospaced", Font.BOLD, 12));
 		frame.add(output);
@@ -63,6 +63,16 @@ public class MainGUI {
 		frame.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
 		frame.setVisible(true);
 		
+		this.exit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}});
+		
+		this.create.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				controller.createInvestmentWindow();
+			}
+		});
 	}
 	
 	public void display(String msg) {

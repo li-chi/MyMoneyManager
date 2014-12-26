@@ -27,6 +27,14 @@ public class Controller {
 		
 	}
 	
+	public void createInvestmentWindow() {
+		CreateUI.getInstance(this);
+	}
+	
+	public void createNewInvestment(){
+		
+	}
+	
 	public static void main(String []args) {
 		controller = Controller.getInstance();
 		controller.run();

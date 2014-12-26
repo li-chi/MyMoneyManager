@@ -1,0 +1,67 @@
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+
+public class CreateUI {
+	private ArrayList<TextField> fieldList;
+	static private CreateUI instance;
+	private Controller controller;
+	private final String[] labelNames = {"Purchase Date(yyyy/mm/dd)","Bank",
+			"Capital(RMB)","Rate(%)","Period(days)"};
+	Frame frame;
+	
+	private CreateUI(Controller controller_) {
+		this.controller = controller_;
+		this.fieldList = new ArrayList<TextField>();
+		frame = new Frame("New Investment");
+		frame.setSize(400, 150);
+		frame.setLayout(new GridLayout(labelNames.length+1,2));
+		frame.setVisible(true);
+		for(int i=0;i<labelNames.length;i++) {
+			frame.add(new Label(labelNames[i]));
+			fieldList.add(new TextField());
+			frame.add(fieldList.get(i));
+		}
+		Button add = new Button("Add");
+		Button cancel = new Button("Cancel");
+		frame.add(add);
+		frame.add(cancel);
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.createNewInvestment();
+			}
+		});
+		
+		cancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				instance = null;
+				frame.dispose();
+			}
+		});
+		
+		frame.addWindowListener(new WindowAdapter(){
+		      public void windowClosed(WindowEvent e){ System.exit(0); }
+		      public void windowClosing(WindowEvent e){ 
+		    	  frame.setVisible(false);
+		    	  frame.dispose();
+		      }
+		    });
+	}
+	
+	public static CreateUI getInstance(Controller controller_) {
+	      if(instance == null) {
+	         instance = new CreateUI(controller_);
+	      }
+	      return instance;
+	}
+	
+	
+}
