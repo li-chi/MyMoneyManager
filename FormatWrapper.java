@@ -6,6 +6,7 @@ public class FormatWrapper {
 	static private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 	static private NumberFormat PERCENT_FORMAT = NumberFormat.getPercentInstance();
 	
+	static private final String NO = "No";
 	static private final String PURCHASE = "Purchase Date";
 	static private final String BANK = "Bank";
 	static private final String CAPITAL = "Capital";
@@ -17,7 +18,8 @@ public class FormatWrapper {
 	static private final String ACTUAL = "Actual Return";
 	
 	static private String TITLE = String.format(
-		"%-15s" 	//purchase date
+			"%-4s" 	//No
+		+ "%-15s" 	//purchase date
 		+ "%-6s"	//bank name
 		+ "%-11s"	//capital
 		+ "%-8s"	//interest rate
@@ -26,9 +28,10 @@ public class FormatWrapper {
 		+ "%-12s" 	//expire date
 		+ "%-16s"	//expected return
 		+ "%-15s",	//actual return
-		PURCHASE,BANK,CAPITAL,INTEREST,PERIOD,DAILY,EXPIRE,EXPECT,ACTUAL);
+		NO,PURCHASE,BANK,CAPITAL,INTEREST,PERIOD,DAILY,EXPIRE,EXPECT,ACTUAL);
 	static private final String INVESTMENT_FORMAT = 
-			"%-15s"		
+			"%-4d"
+			+ "%-15s"		
 			+ "%-6s"
 			+ "%-11.2f"
 			+ "%-8s"
@@ -41,8 +44,9 @@ public class FormatWrapper {
 		return TITLE;
 	}
 	
-	public String wrapInvestment(Investment investment) {
+	public String wrapInvestment(int num, Investment investment) {
 		return String.format(INVESTMENT_FORMAT, 
+				num+1,
 				this.DATE_FORMAT.format(investment.getPurchaseDate()),
 				investment.getBank(),
 				investment.getCapital(),

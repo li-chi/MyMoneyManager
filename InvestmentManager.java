@@ -31,7 +31,7 @@ public class InvestmentManager {
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
 			allInvestments = allInvestments + 
-					this.wrapper.wrapInvestment(investmentList.get(i)) + "\n";
+					this.wrapper.wrapInvestment(i,investmentList.get(i)) + "\n";
 		}
 		return allInvestments;
 	}
