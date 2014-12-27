@@ -1,4 +1,6 @@
 MyMoneyManager
 ==============
 
-a java app that managing investments and returns
+### A java app that managing investments and returns
+
+####Developed by LI Chi
