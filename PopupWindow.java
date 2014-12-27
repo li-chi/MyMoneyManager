@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class PopupWindow {
 	

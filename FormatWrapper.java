@@ -1,6 +1,10 @@
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class FormatWrapper {
 	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");

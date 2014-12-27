@@ -9,6 +9,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class CreateUI {
 	private ArrayList<TextField> fieldList;
@@ -36,25 +40,30 @@ public class CreateUI {
 		frame.add(cancel);
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.createNewInvestment(fieldList.get(0).getText(),fieldList.get(1).getText(),
-						fieldList.get(2).getText(),fieldList.get(3).getText(),fieldList.get(4).getText());
+				if(controller.createNewInvestment(fieldList.get(0).getText(),fieldList.get(1).getText(),
+						fieldList.get(2).getText(),fieldList.get(3).getText(),fieldList.get(4).getText())) {
+					close();
+				}
 			}
 		});
 		
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				instance = null;
-				frame.setVisible(false);
-				frame.dispose();
+				close();
 			}
 		});
 		
 		frame.addWindowListener(new WindowAdapter(){
 		      public void windowClosing(WindowEvent e){ 
-		    	  frame.setVisible(false);
-		    	  frame.dispose();
+		    	  close();
 		      }
 		    });
+	}
+	
+	void close() {
+		instance = null;
+		frame.setVisible(false);
+		frame.dispose();
 	}
 	
 	public static CreateUI getInstance(Controller controller_) {

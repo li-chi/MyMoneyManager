@@ -2,6 +2,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class Controller {
 	static private Controller controller;
@@ -16,6 +20,7 @@ public class Controller {
 	private final String SUCCESS_TYPE = "Successful";
 	private final String ADD_MSG = "New Investment has been added!";
 	private final String EDIT_MSG = "The investment has been edited!";
+	private final String DELETE_MSG = "The investment has been deleted!";
 	private final String NO_DATE = "Please enter date (yyyy/mm/dd)";
 	private final String DATE_ERROR = "Unrecognized date (yyyy/mm/dd)";
 	private final String NO_BANK = "Please enter bank name";
@@ -48,9 +53,7 @@ public class Controller {
 	}
 	
 	void run() {
-		System.out.println(this.wrapper.getTitle());
-		this.investmentManager.addInvestment();
-		System.out.println(this.investmentManager.getAllInvestments());
+		this.investmentManager.init();
 		this.renew();
 	}
 	
@@ -64,7 +67,7 @@ public class Controller {
 		CreateUI.getInstance(this);
 	}
 	
-	public void createNewInvestment(String date_, String bank_, String capital_, 
+	public boolean createNewInvestment(String date_, String bank_, String capital_, 
 			String rate_, String period_) {
 		
 		msgType = MessageType.SUCCESS;
@@ -135,8 +138,10 @@ public class Controller {
 			this.investmentManager.addInvestment(date,bank_,capital,rate,period);
 			this.renew();
 			new PopupWindow(SUCCESS_TYPE,ADD_MSG);
+			return true;
 		} else {
 			new PopupWindow(ERROR_TYPE,msg);
+			return false;
 		}
 	}
 	
@@ -171,7 +176,7 @@ public class Controller {
 		}
 	}
 	
-	public void editInvestment(int num, String date_, String bank_, String capital_, 
+	public boolean editInvestment(int num, String date_, String bank_, String capital_, 
 			String rate_, String period_, String actual_) {
 		msgType = MessageType.SUCCESS;
 		msg = "";
@@ -252,10 +257,19 @@ public class Controller {
 			this.investmentManager.editInvestment(num-1,date,bank_,capital,rate,period,actual);
 			this.renew();
 			new PopupWindow(SUCCESS_TYPE,EDIT_MSG);
+			return true;
 		} else {
 			new PopupWindow(ERROR_TYPE,msg);
+			return false;
 		}
 	}
+	
+	public void deleteInvestment(int num) {
+		this.investmentManager.deleteInvestment(num-1);
+		this.renew();
+		new PopupWindow(SUCCESS_TYPE,DELETE_MSG);
+	}
+	
 	public static void main(String []args) {
 		controller = Controller.getInstance();
 		controller.run();

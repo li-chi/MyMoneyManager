@@ -11,6 +11,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class EditUI {
 	private ArrayList<TextField> fieldList;
@@ -53,28 +57,41 @@ public class EditUI {
 		panel2.add(cancel);
 		frame.add(panel2);
 		frame.pack();
+		
 		confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.editInvestment(num, fieldList.get(0).getText(),fieldList.get(1).getText(),
+				if (controller.editInvestment(num, fieldList.get(0).getText(),fieldList.get(1).getText(),
 						fieldList.get(2).getText(),fieldList.get(3).getText(),fieldList.get(4).getText(),
-						fieldList.get(5).getText());
+						fieldList.get(5).getText())) {
+					close();
+				}
 			}
 		});
 		
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				instance = null;
-				frame.setVisible(false);
-				frame.dispose();
+				close();
+			}
+		});
+		
+		delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.deleteInvestment(num);
+				close();
 			}
 		});
 		
 		frame.addWindowListener(new WindowAdapter(){
 		      public void windowClosing(WindowEvent e){ 
-		    	  frame.setVisible(false);
-		    	  frame.dispose();
+		    	  close();
 		      }
 		    });
+	}
+	
+	void close() {
+		instance = null;
+		frame.setVisible(false);
+		frame.dispose();
 	}
 	
 	public static EditUI getInstance(Controller controller_, String []entries_, int num_) {

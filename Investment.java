@@ -1,7 +1,11 @@
 import java.util.Date;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
-public class Investment {
+public class Investment implements Comparable<Investment>{
 	private Date purchaseDate;
 	private Date expireDate;
 	private double capital;
@@ -43,4 +47,12 @@ public class Investment {
 	public void setExpectedReturn(double expect) {this.expectedReturn = expect;}
 	public void setActualReturn(double actual) {this.actualReturn = actual;}
 	public void setBank(String bank_) {this.bank = bank_;}
+
+	@Override
+	public int compareTo(Investment other) {
+		if (this.getPurchaseDate().after(other.getPurchaseDate()))
+			return 1;
+		else 
+			return -1;
+	}
 }

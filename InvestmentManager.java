@@ -1,13 +1,19 @@
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
+/*
+ * @author LI Chi lichi321@gmail.com
+ * MyMoneyManager, a gift to my mom
+ */
 
 public class InvestmentManager {
 	LinkedList<Investment> investmentList;
 	static private InvestmentManager instance;
 	private FormatWrapper wrapper;
 	private final double DAYS_IN_YEAR = 365.0f;
+	private FileManager fm;
 	
 	private InvestmentManager(FormatWrapper formatWrapper_) {
 		this.investmentList = new LinkedList<Investment>();
@@ -23,10 +29,16 @@ public class InvestmentManager {
 	
 	//Date purchaseDate_, Date expireDate_, double capital_, double interestRate_,
 	//int period_, double dailyInterest_, double expectedReturn_, double actualReturn_, String bank_
-	public void addInvestment() {
+	public void init() {
+		this.fm = new FileManager();
+		this.investmentList = fm.loadFile();
+		/*
 		this.investmentList.add(new Investment(new Date(),new Date(),5000,0.0311,60,50.00,300,"ICBC"));
 		this.investmentList.add(new Investment(new Date(),new Date(),10000,0.1,100,40.22,1001,"HSBC"));
 		this.investmentList.add(new Investment(new Date(),new Date(),300000,0.123,354,354.32,10010,"HSBC"));
+		*/
+		//fm.saveFile(this.investmentList);
+		
 	}
 	
 	public void addInvestment(Date purchase, String bank, double capital, double rate, int period) {
@@ -38,7 +50,7 @@ public class InvestmentManager {
 		c.add(Calendar.DATE, period);
 		Date expire = c.getTime();
 		this.investmentList.add(new Investment(purchase,expire,capital,rate,period,daily,expected,bank));
-
+		this.fm.saveFile(this.investmentList);
 	}
 	
 	public void editInvestment(int num, Date purchase, String bank, double capital, double rate, 
@@ -59,9 +71,16 @@ public class InvestmentManager {
 		investmentList.get(num).setInterestRate(rate);
 		investmentList.get(num).setPeriod(period);
 		investmentList.get(num).setPurchaseDate(purchase);
+		this.fm.saveFile(this.investmentList);
+	}
+	
+	public void deleteInvestment(int num) {
+		this.investmentList.remove(num);
+		this.fm.saveFile(this.investmentList);
 	}
 	
 	public String getAllInvestments() {
+		Collections.sort(this.investmentList);
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
 			allInvestments = allInvestments + 
