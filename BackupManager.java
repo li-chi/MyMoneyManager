@@ -13,11 +13,11 @@ import com.google.gson.reflect.TypeToken;
  * MyMoneyManager, a gift to my mom
  */
 
-public class FileManager {
+public class BackupManager {
 	
 	Gson gson;
 	Type type; 
-	public FileManager() {
+	public BackupManager() {
 		this.gson = new Gson();
 		this.type = new TypeToken<LinkedList<Investment>>(){}.getType();
 	}
@@ -26,7 +26,7 @@ public class FileManager {
 		gson = new Gson();
 		String gsonStr = gson.toJson(ins);
 		try {
-			FileWriter writer = new FileWriter("investment_data.json");
+			FileWriter writer = new FileWriter("investment_data_backup.json");
 			writer.write(gsonStr);
 			writer.close(); 
 		} catch (IOException e) {
@@ -38,11 +38,9 @@ public class FileManager {
 		LinkedList<Investment> ins = null;
 		try {
 			BufferedReader br = new BufferedReader(
-				new FileReader("investment_data.json"));
+				new FileReader("investment_data_backup.json"));
 			ins = gson.fromJson(br,type);
 		} catch (IOException e) {
-			//File file = new File("file.json");
-			//e.printStackTrace();
 		}
 		return ins;
 	}

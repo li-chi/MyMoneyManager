@@ -270,6 +270,11 @@ public class Controller {
 		new PopupWindow(SUCCESS_TYPE,DELETE_MSG);
 	}
 	
+	public void exit() {
+		this.investmentManager.saveBackup();
+		System.exit(0);
+	}
+	
 	public static void main(String []args) {
 		controller = Controller.getInstance();
 		controller.run();

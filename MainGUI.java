@@ -53,10 +53,8 @@ public class MainGUI {
 		
 		this.frame = new Frame("My Money Manager");
 		frame.addWindowListener(new WindowAdapter(){
-		      public void windowClosed(WindowEvent e){ System.exit(0); }
 		      public void windowClosing(WindowEvent e){ 
-		    	  frame.setVisible(false);
-		    	  frame.dispose();
+		    	  close();
 		      }
 		    });
 		frame.add(panel);
@@ -69,7 +67,7 @@ public class MainGUI {
 		
 		this.exit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				close();
 			}});
 		
 		this.create.addActionListener(new ActionListener(){
@@ -83,6 +81,13 @@ public class MainGUI {
 				controller.createEditWindow(editNum.getText());
 			}
 		});
+	}
+	
+	void close() {
+		instance = null;
+		frame.setVisible(false);
+		frame.dispose();
+		controller.exit();
 	}
 	
 	public void display(String msg) {

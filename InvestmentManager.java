@@ -85,13 +85,18 @@ public class InvestmentManager {
 	public String getAllInvestments() {
 		Collections.sort(this.investmentList);
 		double returns = 0;
+		double daily = 0;
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
 			allInvestments = allInvestments + 
 					this.wrapper.wrapInvestment(i,investmentList.get(i)) + "\n";
 			returns += this.investmentList.get(i).getActualReturn();
+			if (this.investmentList.get(i).getExpireDate().after(new Date())) {
+				daily += this.investmentList.get(i).getDailyInterest();
+			}
 		}
-		allInvestments += "Total Actual Return: " + String.format("%.2f", returns);
+		allInvestments += "Total Actual Return: " + String.format("%.2f", returns) + "\n";
+		allInvestments += "Today's Return: " + String.format("%.2f", daily);
 		return allInvestments;
 	}
 	
@@ -101,6 +106,18 @@ public class InvestmentManager {
 	
 	public Investment getInvestment(int num) {
 		return investmentList.get(num);
+	}
+	
+	public void saveBackup() {
+		BackupManager bm = new BackupManager();
+		LinkedList<Investment> backup = bm.loadFile();
+		if (backup == null) {
+			bm.saveFile(this.investmentList);
+		} else {
+			if (backup.size()/2 < this.investmentList.size()) {
+				bm.saveFile(this.investmentList);
+			}
+		}
 	}
 
 }

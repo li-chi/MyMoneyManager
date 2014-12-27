@@ -50,7 +50,7 @@ public class Investment implements Comparable<Investment>{
 
 	@Override
 	public int compareTo(Investment other) {
-		if (this.getPurchaseDate().after(other.getPurchaseDate()))
+		if (this.getExpireDate().after(other.getExpireDate()))
 			return 1;
 		else 
 			return -1;
