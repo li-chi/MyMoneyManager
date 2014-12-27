@@ -14,7 +14,7 @@ public class CreateUI {
 	private ArrayList<TextField> fieldList;
 	static private CreateUI instance;
 	private Controller controller;
-	private final String[] labelNames = {"Purchase Date(yyyy/mm/dd)","Bank name(<5 characters)",
+	private final String[] labelNames = {"Purchase Date(yyyy/mm/dd)","Bank Name(<5 characters)",
 			"Capital(RMB)","Interest Rate(%)","Period(days)"};
 	Frame frame;
 	

@@ -3,21 +3,21 @@ import java.text.SimpleDateFormat;
 
 
 public class FormatWrapper {
-	static private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
-	static private NumberFormat PERCENT_FORMAT = NumberFormat.getPercentInstance();
+	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+	private NumberFormat PERCENT_FORMAT = NumberFormat.getPercentInstance();
 	
-	static private final String NO = "No";
-	static private final String PURCHASE = "Purchase Date";
-	static private final String BANK = "Bank";
-	static private final String CAPITAL = "Capital";
-	static private final String INTEREST = "Rate";
-	static private final String PERIOD = "Period";
-	static private final String DAILY = "Daily";
-	static private final String EXPIRE = "Due Date";
-	static private final String EXPECT = "Expected Return";
-	static private final String ACTUAL = "Actual Return";
+	private final String NO = "No";
+	private final String PURCHASE = "Purchase Date";
+	private final String BANK = "Bank";
+	private final String CAPITAL = "Capital";
+	private final String INTEREST = "Rate";
+	private final String PERIOD = "Period";
+	private final String DAILY = "Daily";
+	private final String EXPIRE = "Due Date";
+	private final String EXPECT = "Expected Return";
+	private final String ACTUAL = "Actual Return";
 	
-	static private String TITLE = String.format(
+	private String TITLE = String.format(
 			"%-4s" 	//No
 		+ "%-15s" 	//purchase date
 		+ "%-6s"	//bank name
@@ -29,7 +29,7 @@ public class FormatWrapper {
 		+ "%-16s"	//expected return
 		+ "%-15s",	//actual return
 		NO,PURCHASE,BANK,CAPITAL,INTEREST,PERIOD,DAILY,EXPIRE,EXPECT,ACTUAL);
-	static private final String INVESTMENT_FORMAT = 
+	private final String INVESTMENT_FORMAT = 
 			"%-4d"
 			+ "%-15s"		
 			+ "%-6s"
@@ -57,6 +57,17 @@ public class FormatWrapper {
 				investment.getExpectedReturn(),
 				investment.getActualReturn()
 				);
+	}
+	
+	public String[] getEditString(Investment investment) {
+		String []str = new String[6];
+		str[0] = this.DATE_FORMAT.format(investment.getPurchaseDate());
+		str[1] = investment.getBank();
+		str[2] = String.format("%.2f", investment.getCapital());
+		str[3] = String.format("%.2f", investment.getInterestRate()*100.0);
+		str[4] = String.format("%d", investment.getPeriod());
+		str[5] = String.format("%.2f", investment.getActualReturn());
+		return str;
 	}
 	
 	static private FormatWrapper instance;

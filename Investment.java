@@ -1,5 +1,3 @@
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -36,4 +34,13 @@ public class Investment {
 	public double getActualReturn() {return this.actualReturn;}
 	public String getBank() {return this.bank;}
 	
+	public void setPurchaseDate(Date purchase) {this.purchaseDate = purchase;}
+	public void setExpireDate(Date expire) {this.expireDate = expire;}
+	public void setCapital(double capital_) {this.capital = capital_;}
+	public void setInterestRate(double interest) {this.interestRate = interest;}
+	public void setPeriod(int period_) {this.period = period_;}
+	public void setDailyInterest(double daily) {this.dailyInterest = daily;}
+	public void setExpectedReturn(double expect) {this.expectedReturn = expect;}
+	public void setActualReturn(double actual) {this.actualReturn = actual;}
+	public void setBank(String bank_) {this.bank = bank_;}
 }

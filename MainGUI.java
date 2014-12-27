@@ -73,6 +73,12 @@ public class MainGUI {
 				controller.createInvestmentWindow();
 			}
 		});
+		
+		this.edit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				controller.createEditWindow(editNum.getText());
+			}
+		});
 	}
 	
 	public void display(String msg) {

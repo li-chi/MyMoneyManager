@@ -41,6 +41,26 @@ public class InvestmentManager {
 
 	}
 	
+	public void editInvestment(int num, Date purchase, String bank, double capital, double rate, 
+			int period, double actual) {
+		rate = rate / 100.0f;
+		double daily = capital * rate / DAYS_IN_YEAR;
+		double expected = daily * period;
+		Calendar c = Calendar.getInstance();
+		c.setTime(purchase);
+		c.add(Calendar.DATE, period);
+		Date expire = c.getTime();
+		investmentList.get(num).setActualReturn(actual);
+		investmentList.get(num).setBank(bank);
+		investmentList.get(num).setCapital(capital);
+		investmentList.get(num).setDailyInterest(daily);
+		investmentList.get(num).setExpectedReturn(expected);
+		investmentList.get(num).setExpireDate(expire);
+		investmentList.get(num).setInterestRate(rate);
+		investmentList.get(num).setPeriod(period);
+		investmentList.get(num).setPurchaseDate(purchase);
+	}
+	
 	public String getAllInvestments() {
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
@@ -49,4 +69,13 @@ public class InvestmentManager {
 		}
 		return allInvestments;
 	}
+	
+	public int getNumOfInvestments() {
+		return investmentList.size();
+	}
+	
+	public Investment getInvestment(int num) {
+		return investmentList.get(num);
+	}
+
 }
