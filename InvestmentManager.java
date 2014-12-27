@@ -32,6 +32,9 @@ public class InvestmentManager {
 	public void init() {
 		this.fm = new FileManager();
 		this.investmentList = fm.loadFile();
+		if (this.investmentList == null) {
+			this.investmentList = new LinkedList<Investment>();
+		}
 		/*
 		this.investmentList.add(new Investment(new Date(),new Date(),5000,0.0311,60,50.00,300,"ICBC"));
 		this.investmentList.add(new Investment(new Date(),new Date(),10000,0.1,100,40.22,1001,"HSBC"));
@@ -81,11 +84,14 @@ public class InvestmentManager {
 	
 	public String getAllInvestments() {
 		Collections.sort(this.investmentList);
+		double returns = 0;
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
 			allInvestments = allInvestments + 
 					this.wrapper.wrapInvestment(i,investmentList.get(i)) + "\n";
+			returns += this.investmentList.get(i).getActualReturn();
 		}
+		allInvestments += "Total Actual Return: " + String.format("%.2f", returns);
 		return allInvestments;
 	}
 	

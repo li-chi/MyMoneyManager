@@ -14,7 +14,7 @@ import java.awt.event.WindowEvent;
  */
 
 public class PopupWindow {
-	
+		
 	Frame frame;
 	
 	public PopupWindow(String type, String msg) {

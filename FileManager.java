@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +42,8 @@ public class FileManager {
 				new FileReader("file.json"));
 			ins = gson.fromJson(br,type);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//File file = new File("file.json");
+			//e.printStackTrace();
 		}
 		return ins;
 	}
