@@ -84,18 +84,52 @@ public class InvestmentManager {
 	
 	public String getAllInvestments() {
 		Collections.sort(this.investmentList);
-		double returns = 0;
+		double actualReturn = 0;
+		double expectedReturn = 0;
 		double daily = 0;
 		String allInvestments = "";
 		for(int i=0;i<this.investmentList.size();i++) {
 			allInvestments = allInvestments + 
 					this.wrapper.wrapInvestment(i,investmentList.get(i)) + "\n";
-			returns += this.investmentList.get(i).getActualReturn();
+			if (this.investmentList.get(i).getActualReturn() == 0) {
+				expectedReturn += this.investmentList.get(i).getExpectedReturn();
+			} else {
+				actualReturn += this.investmentList.get(i).getActualReturn();
+			}		
 			if (this.investmentList.get(i).getExpireDate().after(new Date())) {
 				daily += this.investmentList.get(i).getDailyInterest();
 			}
 		}
-		allInvestments += "Total Actual Return: " + String.format("%.2f", returns) + "\n";
+		allInvestments += "Total Actual Return: " + String.format("%.2f", actualReturn) + "\n";
+		allInvestments += "Total Expected Return: " + String.format("%.2f", expectedReturn) + "\n";
+		allInvestments += "Today's Return: " + String.format("%.2f", daily);
+		return allInvestments;
+	}
+	
+	public String searchByDate(Date from, Date to) {
+		Collections.sort(this.investmentList);
+		double actualReturn = 0;
+		double expectedReturn = 0;
+		double daily = 0;
+		String allInvestments = "";
+		for(int i=0;i<this.investmentList.size();i++) {
+			if(from.before(this.investmentList.get(i).getExpireDate()) 
+					&& to.after(this.investmentList.get(i).getExpireDate())) {
+				allInvestments = allInvestments + 
+						this.wrapper.wrapInvestment(i,investmentList.get(i)) + "\n";
+				if (this.investmentList.get(i).getActualReturn() == 0) {
+					expectedReturn += this.investmentList.get(i).getExpectedReturn();
+				} else {
+					actualReturn += this.investmentList.get(i).getActualReturn();
+				}		
+				if (this.investmentList.get(i).getExpireDate().after(new Date())) {
+					daily += this.investmentList.get(i).getDailyInterest();
+				}
+			}
+			
+		}
+		allInvestments += "Total Actual Return: " + String.format("%.2f", actualReturn) + "\n";
+		allInvestments += "Total Expected Return: " + String.format("%.2f", expectedReturn) + "\n";
 		allInvestments += "Today's Return: " + String.format("%.2f", daily);
 		return allInvestments;
 	}

@@ -25,6 +25,7 @@ public class PopupWindow {
 		    	  frame.dispose();
 		      }
 		    });
+		msg = "<html>" + msg + "</html>";
 		Label label = new Label(msg);
 		if (type.equals("Successful")) {
 			label.setForeground(Color.BLUE);
@@ -36,7 +37,7 @@ public class PopupWindow {
 		frame.add(label);
 		frame.add(ok);
 		frame.pack();
-		frame.setSize(250, 150);
+		frame.setSize(250, 250);
 		frame.setLayout(new GridLayout(2,1));
 		frame.setVisible(true);
 		ok.addActionListener(new ActionListener() {

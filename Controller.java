@@ -22,6 +22,8 @@ public class Controller {
 	private final String EDIT_MSG = "The investment has been edited!";
 	private final String DELETE_MSG = "The investment has been deleted!";
 	private final String NO_DATE = "Please enter date (yyyy/mm/dd)";
+	private final String NO_FROM = "Please enter From (yyyy/mm/dd)";
+	private final String NO_TO = "Please enter To (yyyy/mm/dd)";
 	private final String DATE_ERROR = "Unrecognized date (yyyy/mm/dd)";
 	private final String NO_BANK = "Please enter bank name";
 	private final String BANK_ERROR = "Bank name should < 5 characters";
@@ -78,59 +80,59 @@ public class Controller {
 		
 		if (date_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_DATE + "\n";
+			msg = msg + NO_DATE + "<br/>";
 		} else {
 			try {
 				date = DATE_FORMAT.parse(date_);
 			} catch (ParseException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + DATE_ERROR + "\n";
+				msg = msg + DATE_ERROR + "<br/>";
 			}
 		}
 		
 		if (bank_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_BANK + "\n";
+			msg = msg + NO_BANK + "<br/>";
 		} else {
 			if (bank_.length()>4) {
 				msgType = MessageType.ERROR;
-				msg = msg + BANK_ERROR + "\n";
+				msg = msg + BANK_ERROR + "<br/>";
 			}
 		}
 	
 		if (capital_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_CAPITAL + "\n";
+			msg = msg + NO_CAPITAL + "<br/>";
 		} else {
 			try {
 				capital = Double.parseDouble(capital_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + CAPITAL_ERROR + "\n";
+				msg = msg + CAPITAL_ERROR + "<br/>";
 			}
 		}
 		
 		if (rate_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_RATE + "\n";
+			msg = msg + NO_RATE + "<br/>";
 		} else {
 			try {
 				rate = Double.parseDouble(rate_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + RATE_ERROR + "\n";
+				msg = msg + RATE_ERROR + "<br/>";
 			}
 		}
 		
 		if (period_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_PERIOD + "\n";
+			msg = msg + NO_PERIOD + "<br/>";
 		} else {
 			try {
 				period = Integer.parseInt(period_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + PERIOD_ERROR + "\n";
+				msg = msg + PERIOD_ERROR + "<br/>";
 			}
 		}
 		
@@ -152,19 +154,19 @@ public class Controller {
 		
 		if (numStr.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_EDIT + "\n";
+			msg = msg + NO_EDIT + "<br/>";
 		} else {
 			try {
 				num = Integer.parseInt(numStr);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + EDIT_ERROR + "\n";
+				msg = msg + EDIT_ERROR + "<br/>";
 			}
 		}
 		
 		if (num < 1) {
 			msgType = MessageType.ERROR;
-			msg = msg + EDIT_ERROR + "\n";
+			msg = msg + EDIT_ERROR + "<br/>";
 		}
 		
 		if (msgType == MessageType.SUCCESS) {
@@ -186,59 +188,59 @@ public class Controller {
 		
 		if (date_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_DATE + "\n";
+			msg = msg + NO_DATE + "<br/>";
 		} else {
 			try {
 				date = DATE_FORMAT.parse(date_);
 			} catch (ParseException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + DATE_ERROR + "\n";
+				msg = msg + DATE_ERROR + "<br/>";
 			}
 		}
 		
 		if (bank_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_BANK + "\n";
+			msg = msg + NO_BANK + "<br/>";
 		} else {
 			if (bank_.length()>4) {
 				msgType = MessageType.ERROR;
-				msg = msg + BANK_ERROR + "\n";
+				msg = msg + BANK_ERROR + "<br/>";
 			}
 		}
 	
 		if (capital_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_CAPITAL + "\n";
+			msg = msg + NO_CAPITAL + "<br/>";
 		} else {
 			try {
 				capital = Double.parseDouble(capital_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + CAPITAL_ERROR + "\n";
+				msg = msg + CAPITAL_ERROR + "<br/>";
 			}
 		}
 		
 		if (rate_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_RATE + "\n";
+			msg = msg + NO_RATE + "<br/>";
 		} else {
 			try {
 				rate = Double.parseDouble(rate_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + RATE_ERROR + "\n";
+				msg = msg + RATE_ERROR + "<br/>";
 			}
 		}
 		
 		if (period_.equals("")) {
 			msgType = MessageType.ERROR;
-			msg = msg + NO_PERIOD + "\n";
+			msg = msg + NO_PERIOD + "<br/>";
 		} else {
 			try {
 				period = Integer.parseInt(period_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + PERIOD_ERROR + "\n";
+				msg = msg + PERIOD_ERROR + "<br/>";
 			}
 		}
 		
@@ -249,7 +251,7 @@ public class Controller {
 				actual = Double.parseDouble(actual_);
 			} catch (NumberFormatException e) {
 				msgType = MessageType.ERROR;
-				msg = msg + ACTUAL_ERROR + "\n";
+				msg = msg + ACTUAL_ERROR + "<br/>";
 			}
 		}
 		
@@ -273,6 +275,50 @@ public class Controller {
 	public void exit() {
 		this.investmentManager.saveBackup();
 		System.exit(0);
+	}
+	
+	public void displayAll() {
+		this.renew();
+	}
+	
+	public void search(String from_, String to_) {
+		Date from = null;
+		Date to = null;
+		String msg = "";
+		MessageType msgType = MessageType.SUCCESS;
+		
+		if (from_.equals("")) {
+			msgType = MessageType.ERROR;
+			msg = msg + NO_FROM + "<br/>";
+		} else {
+			try {
+				from = DATE_FORMAT.parse(from_);
+			} catch (ParseException e) {
+				msgType = MessageType.ERROR;
+				msg = msg + DATE_ERROR + "<br/>";
+			}
+		}
+		
+		if (to_.equals("")) {
+			msgType = MessageType.ERROR;
+			msg = msg + NO_TO + "<br/>";
+		} else {
+			try {
+				to = DATE_FORMAT.parse(to_);
+			} catch (ParseException e) {
+				msgType = MessageType.ERROR;
+				msg = msg + DATE_ERROR + "<br/>";
+			}
+		}
+		
+		if (msgType == MessageType.SUCCESS) {
+			ui.clear();
+			ui.display(this.wrapper.getTitle());
+			ui.display(this.investmentManager.searchByDate(from,to));
+		} else {
+			new PopupWindow(ERROR_TYPE,msg);
+			
+		}
 	}
 	
 	public static void main(String []args) {

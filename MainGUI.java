@@ -3,6 +3,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -22,8 +23,12 @@ public class MainGUI {
 	private Button edit;
 	private TextField editNum;
 	private Button exit;
+	private Button displayAll;
+	private Button search;
 	private Frame frame;
 	private TextArea output;
+	private TextField from;
+	private TextField to;
 	Controller controller;
 	
 	private MainGUI(Controller controller_) {
@@ -32,23 +37,39 @@ public class MainGUI {
 		this.edit = new Button("Edit");
 		this.editNum = new TextField(5);
 		this.exit = new Button("Exit");
-		
-		Panel panel = new Panel();
+		this.displayAll = new Button("Display All");
+		this.search = new Button("Search");
+		this.from = new TextField(10);
+		this.to = new TextField(10);
+		Panel panelUp = new Panel();
 		Panel panel1 = new Panel();
-		panel1.setSize(100, 300);
+		panel1.setSize(20, 100);
 		panel1.add(create);
 		Panel panel2 = new Panel();
-		panel2.setSize(100, 300);
+		panel2.setSize(20, 300);
 		panel2.add(editNum);
 		panel2.add(edit);
 		Panel panel3 = new Panel();
-		panel3.setSize(100, 100);
+		panel3.setSize(20, 100);
 		panel3.add(exit);
-		panel.add(panel1);
-		panel.add(panel2);
-		panel.add(panel3);
-		panel.setLayout(new GridLayout(1,3));
-		panel.setSize(100, 800);
+		Panel panel = new Panel();
+		panel.setSize(40,800);
+		panel.setLayout(new GridLayout(2,1));
+		panelUp.add(panel1);
+		panelUp.add(panel2);
+		panelUp.add(panel3);
+		panelUp.setLayout(new GridLayout(1,3));
+		panelUp.setSize(20, 800);
+		Panel panel4 = new Panel();
+		panel4.setSize(20,800);
+		panel4.add(new Label("From(yyyy/mm/dd)"));
+		panel4.add(from);
+		panel4.add(new Label("To(yyyy/mm/dd)"));
+		panel4.add(to);
+		panel4.add(search);
+		panel4.add(displayAll);
+		panel.add(panelUp);
+		panel.add(panel4);
 		
 		
 		this.frame = new Frame("My Money Manager");
@@ -79,6 +100,18 @@ public class MainGUI {
 		this.edit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				controller.createEditWindow(editNum.getText());
+			}
+		});
+		
+		this.displayAll.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				controller.displayAll();
+			}
+		});
+		
+		this.search.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				controller.search(from.getText(),to.getText());
 			}
 		});
 	}
